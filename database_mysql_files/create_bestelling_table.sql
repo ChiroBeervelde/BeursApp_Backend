@@ -1,0 +1,5 @@
+CREATE TABLE Bestelling (
+    id INT NOT NULL AUTO_INCREMENT UNIQUE,
+    bestelDatum DATETIME NOT NULL,
+    PRIMARY KEY ( id )
+);
