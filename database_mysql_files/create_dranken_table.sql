@@ -10,3 +10,5 @@ create table dranken(
    hotkey VARCHAR(100),
    PRIMARY KEY ( id )
 );
+
+//todo: toevoegen max en min prijs
