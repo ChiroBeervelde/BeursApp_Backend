@@ -1,8 +1,10 @@
-create table dranken(
+create or alter table dranken(
    id INT NOT NULL AUTO_INCREMENT UNIQUE,
    naam VARCHAR(100) NOT NULL UNIQUE,
    huidigePrijs double NOT NULL,
    vorigePrijs double,
+   minPrijs double,
+   maxPrijs double,
    categorie VARCHAR(100),
    alcoholisch boolean,
    kleur VARCHAR(100),
@@ -10,5 +12,3 @@ create table dranken(
    hotkey VARCHAR(100),
    PRIMARY KEY ( id )
 );
-
-//todo: toevoegen max en min prijs
