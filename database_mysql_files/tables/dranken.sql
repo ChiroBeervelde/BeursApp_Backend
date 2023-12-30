@@ -1,4 +1,4 @@
-create or alter table dranken(
+CREATE TABLE IF NOT EXISTS dranken (
    id INT NOT NULL AUTO_INCREMENT UNIQUE,
    naam VARCHAR(100) NOT NULL UNIQUE,
    huidigePrijs double NOT NULL,
