@@ -14,7 +14,6 @@ class BeursService {
     async start_beurs() {
         console.log('Beurs Started');
         this.beursSettings = await beursSettignsRepositorie.retrieveSettings();
-        console.log(this.beursSettings);
         this.refreshIntervalId = setInterval(() => this.simuleer(), this.beursSettings.beurs_refresh_timer);
         if (this.beursSettings.beurs_crash_timed) {
             this.beursCrashIntervalId = setInterval(() => this.toggle_beurscrash(), this.beursSettings.beurs_crash_timer);
@@ -43,10 +42,14 @@ class BeursService {
     }
 
     async simuleer_beurs(dranken: Drank[], lastBestellingItems: LastBestellingItems[], totaalAantalBesteld: number) : Promise<void> {
+
         dranken.forEach(async (drank) => {  
-            const aantalBesteld = lastBestellingItems.find(item => item.drank_id === drank.id)?.aantal || 0;          
+            const bestellingItemsOfDrank = lastBestellingItems.filter(item => item.drankId === drank.id);
+            const aantalBesteld = bestellingItemsOfDrank.reduce((acc, item) => acc + item.aantal, 0);    
+
             const nieuwePrijs = this.calculateNewPrice(drank, aantalBesteld, totaalAantalBesteld);
-            await drankenRepositorie.updatePrijs(drank.id, drank.huidigePrijs, nieuwePrijs);
+
+            await drankenRepositorie.updatePrijs(drank.id, drank.huidigePrijs, nieuwePrijs); 
         });
 
         if (this.beursCrash) {
@@ -64,8 +67,10 @@ class BeursService {
             nieuwePrijs = drank.huidigePrijs - (5 * this.beursSettings!.prijs_interval);
         } else {
             const bestelverhouding = aantalBesteld / totaalAantalBesteld;
+            console.log("bestelverhouding");
+            console.log(bestelverhouding);
             switch (true) {
-                case bestelverhouding === 0:
+                case bestelverhouding == 0:
                     nieuwePrijs = drank.huidigePrijs - (3 * this.beursSettings!.prijs_interval);
                     break;
                 case bestelverhouding < 0.25:
@@ -81,7 +86,7 @@ class BeursService {
                     nieuwePrijs = drank.huidigePrijs + (2 * this.beursSettings!.prijs_interval);
                     break;
                 default:
-                    nieuwePrijs = drank.huidigePrijs;
+                    nieuwePrijs = drank.huidigePrijs - this.beursSettings!.prijs_interval;
                     break;
             }
         }

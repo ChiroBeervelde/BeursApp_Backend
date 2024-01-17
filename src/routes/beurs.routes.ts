@@ -12,7 +12,6 @@ class BeursRoutes {
   intializeRoutes() {
     this.router.get("/start", this.controller.startBeurs);
     this.router.get("/stop", this.controller.stopBeurs);
-
   }
 }
 

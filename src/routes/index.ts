@@ -3,6 +3,7 @@ import homeRoutes from "./home.routes";
 import tutorialRoutes from "./tutorial.routes";
 import drankenRoutes from "./dranken.routes";
 import beursRoutes from "./beurs.routes";
+import bestellingRoutes from "./bestelling.routes";
 
 export default class Routes {
   constructor(app: Application) {
@@ -11,6 +12,6 @@ export default class Routes {
     app.use("/api/dranken", drankenRoutes);
     app.use("/api/beurs", beursRoutes);
     // app.use("/api/beurssettings", );
-    // app.use("/api/bestellingen", );
+    app.use("/api/bestellingen", bestellingRoutes);
   }
 }

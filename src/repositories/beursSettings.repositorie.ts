@@ -7,7 +7,8 @@ interface IBeursSettingsRepository {
 }
 
 class BeursSettingsRepository implements IBeursSettingsRepository {
-        retrieveSettings(): Promise<BeursSettings> {
+       
+    retrieveSettings(): Promise<BeursSettings> {
                 let query: string = "SELECT * FROM beursapp_settings";
         
                 return new Promise((resolve, reject) => {
