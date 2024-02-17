@@ -10,7 +10,6 @@ interface IBestellingRepository {
     retrieveLastBestellingItems(): Promise<BestellingItems[]>;
     createBestelling(bestelling: Bestelling): Promise<number>;
     createBestellingItem(bestellingItem: BestellingItems): Promise<number>;
-    
 }
 
 class BestellingRepository implements IBestellingRepository {

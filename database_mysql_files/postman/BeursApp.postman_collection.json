@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "02ac8914-4f88-4c05-b9ed-ebab0b0ecac0",
+		"name": "BeursApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17824562"
+	},
+	"item": [
+		{
+			"name": "Danken",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/dranken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"dranken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Beurs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/beurs/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"beurs",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop Beurs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/beurs/stop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"beurs",
+						"stop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add bestelling",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bestelDatum\": \"2024-01-17T12:34:56.789Z\",\r\n  \"bestellingItems\": [\r\n    {\r\n      \"drankId\": 1,\r\n      \"aantal\": 2,\r\n      \"prijsPerArtikel\": 5.99\r\n    },\r\n    {\r\n      \"drankId\": 2,\r\n      \"aantal\": 1,\r\n      \"prijsPerArtikel\": 7.99\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/bestellingen",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"bestellingen"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
