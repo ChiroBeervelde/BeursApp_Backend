@@ -14,7 +14,6 @@ export default class Server {
         origin: ["http://localhost:3000", "http://20.224.18.56:3000"]
     };
 
-    app.use(cors(corsOptions));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
   }
