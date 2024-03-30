@@ -4,7 +4,7 @@ dotenv.config();
 
 export default {
   HOST: "localhost",
-  USER: process.env.DATABASE_USER,
-  PASSWORD: process.env.DATABASE_PASSWORD,
+  USER: "root",
+  PASSWORD: "password",
   DB: "beurs_app"
 };
