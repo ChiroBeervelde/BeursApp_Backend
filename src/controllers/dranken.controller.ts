@@ -5,6 +5,7 @@ export default class DrankenController {
 
     async findAll(req: Request, res: Response) {
         try {
+            console.log("FACK DEES")
             const dranken = await drankenService.findAllDranken();
             res.status(200).send(dranken);
           } catch (err) {
