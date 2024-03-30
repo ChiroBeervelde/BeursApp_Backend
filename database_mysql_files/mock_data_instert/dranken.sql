@@ -37,5 +37,5 @@ INSERT INTO dranken (naam, huidigePrijs, vorigePrijs, minPrijs, maxPrijs, catego
 VALUES ('Chaudfontaine', 2.75, 2.5, 2, 5, 'water', false, '#0000ff', '/images/logos/chaudfontaine-logo.png', 'c');
 
 -- Orval
-INSERT INTO dranken (naam, huidigePrijs, vorigePrijs, minPrijs, maxPrijs, drankencategorie, alcoholisch, kleur, afbeelding, hotkey)
+INSERT INTO dranken (naam, huidigePrijs, vorigePrijs, minPrijs, maxPrijs, categorie, alcoholisch, kleur, afbeelding, hotkey)
 VALUES ('Orval', 5, 4.75, 2, 5, 'bier', true, '#ff9900', '/images/logos/orval-logo.jpeg', 'o');

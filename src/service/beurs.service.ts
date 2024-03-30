@@ -31,8 +31,10 @@ class BeursService {
     async simuleer() {
         console.log('Beurs Simulated');
         const lastBestellingItems = await bestellingRepositorie.retrieveLastBestellingItems();
+        console.log(lastBestellingItems)
         const dranken = await drankenRepositorie.retrieveAll();
         const totaalAantalBesteld = lastBestellingItems.reduce((acc, item) => acc + item.aantal, 0);
+        console.log(totaalAantalBesteld)
         const beursSettings = await beursSettignsRepositorie.retrieveSettings();
 
         if (!beursSettings!.beurs_crash_timed && Math.random() < beursSettings!.beurs_crash_probability/100) {
@@ -43,13 +45,16 @@ class BeursService {
 
     async simuleer_beurs(dranken: Drank[], lastBestellingItems: LastBestellingItems[], totaalAantalBesteld: number) : Promise<void> {
 
-        dranken.forEach(async (drank) => {  
+        console.log(dranken.map(dranken=> dranken.id))
+        console.log(lastBestellingItems.map(lastBestellingItems => lastBestellingItems))
+        dranken.forEach(async (drank) => {
             const bestellingItemsOfDrank = lastBestellingItems.filter(item => item.drankId === drank.id);
             const aantalBesteld = bestellingItemsOfDrank.reduce((acc, item) => acc + item.aantal, 0);    
 
             const nieuwePrijs = this.calculateNewPrice(drank, aantalBesteld, totaalAantalBesteld);
 
-            await drankenRepositorie.updatePrijs(drank.id, drank.huidigePrijs, nieuwePrijs); 
+            console.log(drank.naam, aantalBesteld, totaalAantalBesteld, nieuwePrijs);
+            await drankenRepositorie.updatePrijs(drank.id, drank.huidigePrijs, nieuwePrijs);
         });
 
         if (this.beursCrash) {
@@ -67,22 +72,21 @@ class BeursService {
             nieuwePrijs = drank.huidigePrijs - (5 * this.beursSettings!.prijs_interval);
         } else {
             const bestelverhouding = aantalBesteld / totaalAantalBesteld;
-            console.log("bestelverhouding");
-            console.log(bestelverhouding);
+            console.log("bestelverhouding", bestelverhouding)
             switch (true) {
                 case bestelverhouding == 0:
                     nieuwePrijs = drank.huidigePrijs - (3 * this.beursSettings!.prijs_interval);
                     break;
-                case bestelverhouding < 0.25:
+                case bestelverhouding < 0.1:
                     nieuwePrijs = drank.huidigePrijs - (2 * this.beursSettings!.prijs_interval);
                     break;
-                case bestelverhouding < 0.5:
+                case bestelverhouding < 0.2:
                     nieuwePrijs = drank.huidigePrijs - this.beursSettings!.prijs_interval;
                     break;
-                case bestelverhouding < 0.75:
+                case bestelverhouding < 0.3:
                     nieuwePrijs = drank.huidigePrijs + this.beursSettings!.prijs_interval;
                     break;
-                case bestelverhouding < 1:
+                case bestelverhouding < 5:
                     nieuwePrijs = drank.huidigePrijs + (2 * this.beursSettings!.prijs_interval);
                     break;
                 default:

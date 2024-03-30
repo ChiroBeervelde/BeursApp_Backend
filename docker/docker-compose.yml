@@ -1,0 +1,18 @@
+version: '1.0'
+services:
+  BeursApp_DB:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'beurs_app'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - beurs_app-db:/var/lib/mysql
+volumes:
+  beurs_app-db:

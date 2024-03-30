@@ -15,14 +15,14 @@ class BestellingService {
         const bestellingId = await bestellingRepositorie.createBestelling(bestelling);
 
         for (const item of bestelling.bestellingItems) {
-            console.log(item);
+            console.log('item:', item);
             const bestellingitem: BestellingItems = {
-                drankId: item.drankId,
+                drankId: item.id,
                 bestellingId: bestellingId,
                 aantal: item.aantal,
                 prijsPerArtikel: item.prijsPerArtikel,
             } as BestellingItems;
-
+            console.log('bestellingitem:', bestellingitem)
             await bestellingRepositorie.createBestellingItem(bestellingitem);
         }
 

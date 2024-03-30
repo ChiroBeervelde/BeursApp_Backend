@@ -22,15 +22,20 @@ class BestellingRepository implements IBestellingRepository {
         }
 
         retrieveLastBestellingItems(): Promise<BestellingItems[]> {
-                let query: string = "SELECT bi.drankId, bi.aantal, bi.prijsPerArtikel FROM bestelling_items bi JOIN bestellingen b ON bi.bestellingid = b.id WHERE b.bestelDatum >= NOW() - INTERVAL 2 MINUTE";
+            let lastRound = new Date(Date.now() - (2 * 60 * 1000));
+            let formattedDate = lastRound.toISOString().slice(0, 19).replace('T', ' '); // Format date as YYYY-MM-DD HH:mm:ss
 
-                return new Promise((resolve, reject) => {
-                    connection.query<BestellingItems[]>(query, (err, res) => {
-                        if (err) reject(err);
-                        else resolve(res);
-                    });
+            let query: string = `SELECT * FROM bestelling_items bi 
+                         JOIN bestellingen b ON bi.bestellingid = b.id 
+                         WHERE b.bestelDatum >= '${formattedDate}'`;
+
+            return new Promise((resolve, reject) => {
+                connection.query<BestellingItems[]>(query, (err, res) => {
+                    if (err) reject(err);
+                    else resolve(res);
                 });
-            }
+            });
+        }
 
         createBestelling(bestelling: Bestelling): Promise<number> {
             let query: string = "INSERT INTO bestellingen (bestelDatum) VALUES (?)";
@@ -54,7 +59,9 @@ class BestellingRepository implements IBestellingRepository {
             return new Promise((resolve, reject) => {
                 connection.query(query, [bestellingItem.drankId, bestellingItem.bestellingId, bestellingItem.aantal, bestellingItem.prijsPerArtikel], (err, res: OkPacket) => {
                     if (err) reject(err);
-                    else resolve(res.insertId);
+                    else {
+                        resolve(res.insertId);
+                    }
                 });
             });
         }
