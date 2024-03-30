@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default {
-  HOST: "20.224.18.56",
+  HOST: "localhost",
   USER: "root",
   PASSWORD: "password",
   DB: "beurs_app"
