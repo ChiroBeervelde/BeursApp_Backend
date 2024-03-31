@@ -40,11 +40,8 @@ class BestellingRepository implements IBestellingRepository {
         createBestelling(bestelling: Bestelling): Promise<number> {
             let query: string = "INSERT INTO bestellingen (bestelDatum) VALUES (?)";
             let bestelDatum = new Date(bestelling.bestelDatum);
-
             bestelDatum = new Date();
-            
-            console.log(bestelDatum);
-
+    
             return new Promise((resolve, reject) => {
                 connection.query(query, [bestelDatum], (err, res: OkPacket) => {
                     if (err) reject(err);

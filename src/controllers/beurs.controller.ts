@@ -5,8 +5,9 @@ export default class BeursController {
 
     async startBeurs(req: Request, res: Response) {
         try {
+            console.log("startBeurs");
             await beursService.start_beurs();
-      
+    
             res.status(200).json({
                 message: "Beurs started"
             });
@@ -19,6 +20,7 @@ export default class BeursController {
 
     async stopBeurs(req: Request, res: Response) {
         try {
+            console.log("stopBeurs");
             await beursService.stop_beurs();
       
             res.status(200).json({

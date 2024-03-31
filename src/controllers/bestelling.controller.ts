@@ -3,6 +3,7 @@ import bestellingService from "../service/bestelling.service";
 import Bestelling from "../models/bestelling.model";
 
 export default class BestellingController {
+
   async create(req: Request, res: Response) {
     if (!req.body) {
       res.status(400).send({
@@ -12,6 +13,7 @@ export default class BestellingController {
     }
 
     try {
+      console.log("createBestelling");
       const bestelling: Bestelling = req.body;
       await bestellingService.createBestelling(bestelling);
 
