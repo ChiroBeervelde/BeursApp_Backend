@@ -80,8 +80,14 @@ class BeursService {
                 case bestelverhouding < 0.3:
                     nieuwePrijs = drank.huidigePrijs + this.beursSettings!.prijs_interval;
                     break;
-                case bestelverhouding < 5:
+                case bestelverhouding < 0.4:
                     nieuwePrijs = drank.huidigePrijs + (2 * this.beursSettings!.prijs_interval);
+                    break;
+                case bestelverhouding < 0.6:
+                    nieuwePrijs = drank.huidigePrijs + (3 * this.beursSettings!.prijs_interval);
+                    break;
+                case bestelverhouding < 5:
+                    nieuwePrijs = drank.huidigePrijs + (4 * this.beursSettings!.prijs_interval);
                     break;
                 default:
                     nieuwePrijs = drank.huidigePrijs - this.beursSettings!.prijs_interval;
