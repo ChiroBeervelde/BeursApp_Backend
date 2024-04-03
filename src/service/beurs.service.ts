@@ -4,6 +4,7 @@ import bestellingRepositorie from "../repositories/bestelling.repositorie";
 import drankenRepositorie from "../repositories/dranken.repositorie";
 import Drank from "../models/drank.model";
 import LastBestellingItems from "../models/bestellingItems.model";
+import { log } from "console";
 
 class BeursService {
     private refreshIntervalId: string | number | NodeJS.Timeout | undefined;
@@ -67,6 +68,9 @@ class BeursService {
             nieuwePrijs = drank.huidigePrijs - (5 * this.beursSettings!.prijs_interval);
         } else {
             const bestelverhouding = aantalBesteld / totaalAantalBesteld;
+            console.log(drank.naam)
+            console.log( bestelverhouding)
+
             switch (true) {
                 case bestelverhouding == 0:
                     nieuwePrijs = drank.huidigePrijs - (3 * this.beursSettings!.prijs_interval);
@@ -100,6 +104,8 @@ class BeursService {
         if (nieuwePrijs < drank.minPrijs) {
             nieuwePrijs = drank.minPrijs;
         }
+            console.log( drank.huidigePrijs)
+            console.log( nieuwePrijs)
 
         return nieuwePrijs;
     }
