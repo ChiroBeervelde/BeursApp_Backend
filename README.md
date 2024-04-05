@@ -20,5 +20,5 @@ https://hub.docker.com/_/mysql
 
 ## connecteren met de database
 
-CREATE USER 'root'@'188.188.235.158' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON beurs_app.* TO 'root'@'188.188.235.158' WITH GRANT OPTION;
+CREATE USER 'root'@'188.189.185.136' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON beurs_app.* TO 'root'@'188.189.185.136' WITH GRANT OPTION;
