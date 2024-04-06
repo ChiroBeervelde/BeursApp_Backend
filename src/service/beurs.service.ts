@@ -65,6 +65,7 @@ class BeursService {
     calculateNewPrice(drank: Drank, aantalBesteld: number, totaalAantalBesteld: number) {
         let nieuwePrijs;
         if (this.beursCrash) {
+            console.log("BeursCrashed");
             nieuwePrijs = drank.huidigePrijs - (5 * this.beursSettings!.prijs_interval);
         } else {
             const bestelverhouding = aantalBesteld / totaalAantalBesteld;
@@ -73,7 +74,7 @@ class BeursService {
 
             switch (true) {
                 case bestelverhouding == 0:
-                    nieuwePrijs = drank.huidigePrijs - (3 * this.beursSettings!.prijs_interval);
+                    nieuwePrijs = drank.huidigePrijs - (1 * this.beursSettings!.prijs_interval); // minder snel laten zakken als er niks van verkocht wordt
                     break;
                 case bestelverhouding < 0.05:
                     nieuwePrijs = drank.huidigePrijs - (2 * this.beursSettings!.prijs_interval);
